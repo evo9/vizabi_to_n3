@@ -19,7 +19,7 @@ lineController.controller('LineCtrl', [
         $scope.basicIndicators = [];
         $scope.time = 2014;
         $scope.timeMin = 1990;
-        $scope.timeMax = 2014;
+        $scope.timeMax = 2012;
 
         $scope.chartData = function() {
             var result = [];
@@ -36,7 +36,7 @@ lineController.controller('LineCtrl', [
 
                         data.values.push({
                             x: v['time'],
-                            y: v['gdp_per_cap']
+                            y: Math.round(v['gdp_per_cap'])
                         });
                     }
                 });
@@ -56,23 +56,12 @@ lineController.controller('LineCtrl', [
                             $scope.basicIndicators = $utils.getBasicIndicators(basicIndicators);
 
                             nv.addGraph(function () {
-                                $scope.chart = nv.models.vizabiLineChart()
-                                    .options({
-                                        transitionDuration: 300
-                                        //useInteractiveGuideline: true
-                                    })
+                                $scope.chart = nv.models.lineChart()
+                                    .width(500)
+                                    .forceX([1990, 2000, 2012])
+                                    .forceY([2000, 8000, 32000])
                                 ;
-                                // chart sub-models (ie. xAxis, yAxis, etc) when accessed directly, return themselves, not the parent chart, so need to chain separately
-                                $scope.chart.xAxis
-                                    //.axisLabel("Time (s)")
-                                    //.tickFormat(d3.format('.1f'))
-                                    .staggerLabels(false)
-                                ;
-                                $scope.chart.forceX([1990, 2000, 2012]);
-                                $scope.chart.yAxis
-                                    //.axisLabel('Voltage (v)')
-                                    .tickFormat(d3.format('d'))
-                                ;
+
                                 d3.select('#chart svg')
                                     .datum($scope.chartData())
                                     .call($scope.chart);

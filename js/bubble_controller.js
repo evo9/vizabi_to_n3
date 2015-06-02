@@ -17,7 +17,7 @@ bubbleController.controller('BubbleCtrl', [
         };
         $scope.names = [];
         $scope.basicIndicators = [];
-        $scope.time = 2014;
+        $scope.time = 2012;
         $scope.timeMin = 1990;
         $scope.timeMax = 2014;
 
@@ -36,10 +36,10 @@ bubbleController.controller('BubbleCtrl', [
                         data.values.push({
                             color: $scope.colors[name['geo.region']] ? $scope.colors[name['geo.region']] : $scope.colors['_default'],
                             label: name['geo.name'],
-                            x: v['gdp_per_cap'],
-                            y: v['lex'],
+                            x: Math.round(v['gdp_per_cap']),
+                            y: Math.round(v['lex']),
                             shape: 'circle',
-                            size: v['pop']
+                            size: Math.round(v['pop'])
                         });
                     }
                 });
@@ -61,24 +61,24 @@ bubbleController.controller('BubbleCtrl', [
                             $scope.basicIndicators = $utils.getBasicIndicators(basicIndicators);
 
                             nv.addGraph(function() {
-                                $scope.chart = nv.models.vizabiBubbleChart()
+                                $scope.chart = nv.models.scatterChart()
+                                    .height(500)
+                                    .width(500)
                                     .showLegend(false)
-                                    /*.showDistX(true)
+                                    .forceY([30, 40, 50, 60, 70, 80])
+                                    .forceX([250, 4000, 64000])
+                                    .showDistX(true)
                                     .showDistY(true)
-                                    .useVoronoi(true)
-                                    .color(d3.scale.category10().range())
-                                    .duration(300)*/
                                 ;
-                                /*$scope.chart.dispatch.on('renderEnd', function(){
-                                    console.log('render complete');
-                                });
-                                $scope.chart.xAxis.tickFormat(d3.format('.02f'));
-                                $scope.chart.yAxis.tickFormat(d3.format('.02f'));*/
+
+                                //$scope.chart.yRange([30, 40, 50, 60, 70, 80]);
+
                                 d3.select('#chart svg')
                                     .datum($scope.chartData())
                                     .call($scope.chart);
+
                                 nv.utils.windowResize($scope.chart.update);
-                                //$scope.chart.dispatch.on('stateChange', function(e) { ('New State:', JSON.stringify(e)); });
+
                                 return $scope.chart;
                             });
                         }

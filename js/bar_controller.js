@@ -39,7 +39,7 @@ barController.controller('BarCtrl', [
                         data.values.push({
                             color: $scope.colors[name['geo']] ? $scope.colors[name['geo']] : $scope.colors['_default'],
                             label: name['geo.name'],
-                            value: v['lex']
+                            value: Math.round(v['lex'])
                         });
                     }
                 });
@@ -62,13 +62,16 @@ barController.controller('BarCtrl', [
 
                             nv.addGraph(function() {
                                 $scope.chart = nv.models.vizabiBarChart()
+                                    .width(500)
                                     .x(function(d) { return d.label })
                                     .y(function(d) { return d.value })
                                     .staggerLabels(false)
                                     .showValues(false);
 
                                 $scope.chart.yAxis
-                                    .tickFormat(d3.format('.1f'))
+                                    .tickFormat(d3.format('d'));
+
+                                $scope.chart.forceY([55, 60, 65, 70, 75, 80, 85]);
 
                                 var svg = d3.select('#chart svg').datum($scope.chartData());
                                 svg.transition().duration(0).call($scope.chart);
