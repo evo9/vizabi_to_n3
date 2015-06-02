@@ -65,6 +65,9 @@ barController.controller('BarCtrl', [
                                     .staggerLabels(false)
                                     .showValues(false);
 
+                                $scope.chart.yAxis
+                                    .tickFormat(d3.format('d'))
+
                                 var svg = d3.select('#chart svg').datum($scope.chartData());
                                 svg.transition().duration(0).call($scope.chart);
 

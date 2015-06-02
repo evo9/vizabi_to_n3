@@ -7,32 +7,19 @@ bubbleController.controller('BubbleCtrl', [
 
         $scope.local = 'en';
         $scope.geoCat = 'country';
+        $scope.colors = {
+            _default: '#ffb600',
+            world: '#ffb600',
+            eur: '#FFE700',
+            afr: '#00D5E9',
+            asi: '#FF5872',
+            ame: '#7FEB00'
+        };
         $scope.names = [];
         $scope.basicIndicators = [];
         $scope.time = 2014;
         $scope.timeMin = 1990;
         $scope.timeMax = 2014;
-
-        $scope.randomData = function(groups, points) {
-            var data = [],
-                shapes = ['circle'],
-                random = d3.random.normal();
-            for (i = 0; i < groups; i++) {
-                data.push({
-                    key: 'Group ' + i,
-                    values: []
-                });
-                for (j = 0; j < points; j++) {
-                    data[i].values.push({
-                        x: random(),
-                        y: random(),
-                        size: Math.round(Math.random() * 100) / 100,
-                        shape: 'circle'
-                    });
-                }
-            }
-            return data;
-        };
 
         $scope.chartData = function() {
             var returns = [];
@@ -47,12 +34,12 @@ bubbleController.controller('BubbleCtrl', [
                     if (v['geo'] == name['geo'] && v['time'] == $scope.time && v['gdp_per_cap'] && v['lex'] && v['pop']) {
 
                         data.values.push({
-                            //color: $scope.colors[name['geo']] ? $scope.colors[name['geo']] : $scope.colors['_default'],
+                            color: $scope.colors[name['geo.region']] ? $scope.colors[name['geo.region']] : $scope.colors['_default'],
                             label: name['geo.name'],
-                            x: v['gdp_per_cap']/100,
+                            x: v['gdp_per_cap'],
                             y: v['lex'],
                             shape: 'circle',
-                            size: v['pop']/100000
+                            size: v['pop']
                         });
                     }
                 });
