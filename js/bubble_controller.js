@@ -71,8 +71,6 @@ bubbleController.controller('BubbleCtrl', [
                                     .showDistY(true)
                                 ;
 
-                                //$scope.chart.yRange([30, 40, 50, 60, 70, 80]);
-
                                 d3.select('#chart svg')
                                     .datum($scope.chartData())
                                     .call($scope.chart);

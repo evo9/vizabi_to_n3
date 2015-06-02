@@ -23,7 +23,6 @@ barController.controller('BarCtrl', [
 
         $scope.chartData = function() {
             var result = [];
-            var values = [];
             angular.forEach($scope.names, function(name, key) {
                 var data = {
                     key: name['geo.name'],
@@ -31,9 +30,6 @@ barController.controller('BarCtrl', [
                 }
 
                 angular.forEach($scope.basicIndicators, function(v, k) {
-                    if (angular.element.inArray(v['lex'], values) == -1) {
-                        values.push(v['lex']);
-                    }
                     if (v['geo'] == name['geo'] && v['time'] == $scope.time) {
 
                         data.values.push({
@@ -46,8 +42,6 @@ barController.controller('BarCtrl', [
 
                 result.push(data);
             });
-
-            console.log($utils.getMax(values));
 
             return result;
         };
@@ -66,12 +60,11 @@ barController.controller('BarCtrl', [
                                     .x(function(d) { return d.label })
                                     .y(function(d) { return d.value })
                                     .staggerLabels(false)
-                                    .showValues(false);
+                                    .showValues(false)
+                                    .forceY([55, 60, 65, 70, 75, 80, 85])
+                                ;
 
-                                $scope.chart.yAxis
-                                    .tickFormat(d3.format('d'));
-
-                                $scope.chart.forceY([55, 60, 65, 70, 75, 80, 85]);
+                                $scope.chart.yAxis.tickFormat(d3.format('d'));
 
                                 var svg = d3.select('#chart svg').datum($scope.chartData());
                                 svg.transition().duration(0).call($scope.chart);
