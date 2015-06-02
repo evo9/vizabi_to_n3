@@ -27,13 +27,12 @@ lineController.controller('LineCtrl', [
                 var data = {
                     key: name['geo.name'],
                     color: $scope.colors[name['geo']] ? $scope.colors[name['geo']] : $scope.colors['_default'],
-                    //label: name['geo.name'],
-                    strokeWidth: 5,
+                    label: name['geo.name'],
                     values: []
                 }
 
                 angular.forEach($scope.basicIndicators, function(v, k) {
-                    if (v['geo'] == name['geo']) {
+                    if (v['geo'] == name['geo'] && v['time'] <= $scope.time) {
 
                         data.values.push({
                             x: v['time'],
@@ -89,5 +88,19 @@ lineController.controller('LineCtrl', [
         };
 
         $scope.init();
+
+        $scope.changeTime = function() {
+            if ($scope.chart !== null) {
+                $scope.redraw();
+            }
+        };
+
+        $scope.redraw = function() {
+            d3.select('#chart svg')
+                .datum($scope.chartData())
+                .transition()
+                .duration(0)
+                .call($scope.chart);
+        };
     }
 ]);

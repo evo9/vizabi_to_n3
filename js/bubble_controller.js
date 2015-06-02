@@ -88,5 +88,19 @@ bubbleController.controller('BubbleCtrl', [
         };
 
         $scope.init();
+
+        $scope.changeTime = function() {
+            if ($scope.chart !== null) {
+                $scope.redraw();
+            }
+        };
+
+        $scope.redraw = function() {
+            d3.select('#chart svg')
+                .datum($scope.chartData())
+                .transition()
+                .duration(0)
+                .call($scope.chart);
+        };
     }
 ]);
