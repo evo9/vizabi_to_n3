@@ -1,1 +1,1 @@
-<a href="http://vizavi.pixy.pro">Link to project</a>
+<a href="http://vizabi.pixy.pro" target="_blank">Link to project</a>
