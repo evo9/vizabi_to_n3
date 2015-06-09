@@ -56,8 +56,9 @@ lineController.controller('LineCtrl', [
                             $scope.basicIndicators = $utils.getBasicIndicators(basicIndicators);
 
                             nv.addGraph(function () {
-                                $scope.chart = nv.models.lineChart()
+                                $scope.chart = nv.models.vizabiLineChart()
                                     .width(500)
+                                    .lineStrokeWidth(8)
                                     .forceX([1990, 2000, 2012])
                                     .forceY([2000, 8000, 32000])
                                 ;
