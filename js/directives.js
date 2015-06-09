@@ -26,25 +26,30 @@ angular.module('chartsDirectives', ['utils'])
 
                 $scope.playGraph = function() {
                     var timeArr = $utils.getTimeArr($scope.basicIndicators);
-                    if (this.time == timeArr[timeArr.length - 1]) {
-                        this.showPause = false;
+                    if ($scope.time == timeArr[timeArr.length - 1]) {
+                        $scope.$apply(function () {
+                            $scope.showPause = false;
+                        });
                     }
                     else {
-                        this.showPause = true;
+                        $scope.$apply(function () {
+                            $scope.showPause = true;
+                        });
                     }
 
                     $scope.changeTime();
 
                     for (var i = 0; i < timeArr.length; i ++) {
-                        if (timeArr[i + 1] > this.time) {
-                            this.time = timeArr[i + 1];
+                        if (timeArr[i + 1] > $scope.time) {
+                            $scope.$apply(function () {
+                                $scope.time = timeArr[i + 1];
+                            });
                             setTimeout(function(){
                                 $scope.playGraph();
                             }, 90);
                             break;
                         }
                     }
-                    return this;
                 }
             };
             return {
