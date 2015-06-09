@@ -15477,16 +15477,18 @@
                 linePaths.enter().append('path')
                     .attr('class', 'nv-line')
                     .attr('d',
-                    d3.svg.line()
-                        .interpolate(interpolate)
-                        .defined(defined)
-                        .x(function (d, i) {
-                            return nv.utils.NaNtoZero(x0(getX(d, i)))
-                        })
-                        .y(function (d, i) {
-                            return nv.utils.NaNtoZero(y0(getY(d, i)))
-                        })
-                );
+                        d3.svg.line()
+                            .interpolate(interpolate)
+                            .defined(defined)
+                            .x(function (d, i) {
+                                console.log(getX(d, i));
+                                return nv.utils.NaNtoZero(x0(getX(d, i)))
+                            })
+                            .y(function (d, i) {
+                                return nv.utils.NaNtoZero(y0(getY(d, i)))
+                            })
+                    )
+                    .style('stroke-linejoin', 'round');
 
                 if (strokeWidth !== null) {
                     linePaths.style('stroke-width', strokeWidth);
