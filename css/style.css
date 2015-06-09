@@ -51,6 +51,10 @@ select{
     color:#000;
 }
 
+.sidebar {
+    background: #d6d6d6;
+}
+
 #chart {
     height: 500px;
     width: 500px;
@@ -60,3 +64,24 @@ select{
     width: 500px;
     margin: 0 auto;
 }
+
+input[type="range"] {
+
+}
+
+#player_button button {
+    display: block;
+    width: 40px;
+    height: 40px;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    border-radius: 40px;
+    background: #333;
+    border: none;
+    cursor: pointer;
+    margin: 0 auto;
+}
+#player_scale {
+    padding: 15px 0 0;
+}
+

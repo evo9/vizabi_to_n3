@@ -15,11 +15,45 @@ barController.controller('BarCtrl', [
             asi: '#FF5872',
             ame: '#7FEB00'
         };
+        $scope.params =[
+            {
+                label: 'TIME',
+                value: 'time'
+            },
+            {
+                label: 'GEO',
+                value: 'geo'
+            },
+            {
+                label: 'GEO_PER_CAP',
+                value: 'gdp_per_cap'
+            },
+            {
+                label: 'LEX',
+                value: 'lex'
+            },
+            {
+                label: 'POP',
+                value: 'pop'
+            },
+            {
+                label: 'GEO.REGION',
+                value: 'geo.region'
+            },
+            {
+                label: 'GEO.CATEGORY',
+                value: 'geo.cat'
+            },
+
+        ];
         $scope.names = [];
         $scope.basicIndicators = [];
-        $scope.time = 2014;
         $scope.timeMin = 1990;
         $scope.timeMax = 2014;
+        $scope.time = 2014;
+
+        $scope.showPause = false;
+        $scope.x = null;
 
         $scope.chartData = function() {
             var result = [];

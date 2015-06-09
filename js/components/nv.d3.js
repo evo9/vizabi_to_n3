@@ -15481,7 +15481,6 @@
                             .interpolate(interpolate)
                             .defined(defined)
                             .x(function (d, i) {
-                                console.log(getX(d, i));
                                 return nv.utils.NaNtoZero(x0(getX(d, i)))
                             })
                             .y(function (d, i) {

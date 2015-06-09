@@ -1,6 +1,6 @@
 var modules = [
     'ngRoute',
-    'chartsServices',
+    'chartsDirectives',
     'barController',
     'bubbleController',
     'lineController'
