@@ -7,6 +7,8 @@ bubbleController.controller('BubbleCtrl', [
 
         $scope.local = 'en';
         $scope.geoCat = 'country';
+        $scope.xAxis = 'gdp_per_cap';
+        $scope.yAxis = 'lex';
         $scope.colors = {
             _default: '#ffb600',
             world: '#ffb600',
@@ -15,11 +17,46 @@ bubbleController.controller('BubbleCtrl', [
             asi: '#FF5872',
             ame: '#7FEB00'
         };
+        $scope.params =[
+            {
+                label: 'TIME',
+                value: 'time'
+            },
+            {
+                label: 'GEO',
+                value: 'geo'
+            },
+            {
+                label: 'GEO_PER_CAP',
+                value: 'gdp_per_cap'
+            },
+            {
+                label: 'LEX',
+                value: 'lex'
+            },
+            {
+                label: 'POP',
+                value: 'pop'
+            },
+            {
+                label: 'GEO.REGION',
+                value: 'geo.region'
+            },
+            {
+                label: 'GEO.CATEGORY',
+                value: 'geo.cat'
+            },
+
+        ];
         $scope.names = [];
         $scope.basicIndicators = [];
         $scope.time = 2012;
         $scope.timeMin = 1990;
         $scope.timeMax = 2014;
+
+        $scope.showPause = false;
+        $scope.x = $scope.xAxis;
+        $scope.y = $scope.yAxis;
 
         $scope.chartData = function() {
             var returns = [];
@@ -36,8 +73,8 @@ bubbleController.controller('BubbleCtrl', [
                         data.values.push({
                             color: $scope.colors[name['geo.region']] ? $scope.colors[name['geo.region']] : $scope.colors['_default'],
                             label: name['geo.name'],
-                            x: Math.round(v['gdp_per_cap']),
-                            y: Math.round(v['lex']),
+                            x: Math.round(v[$scope.xAxis]),
+                            y: Math.round(v[$scope.yAxis]),
                             shape: 'circle',
                             size: Math.round(v['pop'])
                         });

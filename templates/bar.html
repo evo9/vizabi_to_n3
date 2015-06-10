@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-10 main">
+    <div class="col-md-9 main">
         <div id="chart">
             <svg></svg>
         </div>
@@ -22,15 +22,22 @@
                         </svg>
                     </button>
                 </div>
-                <div id="player_scale" class="col-md-9 col-md-offset-1">
+                <div id="player_scale" class="col-md-10">
                     <input type="range" ng-model="time" />
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-2 sidebar">
+    <div class="col-md-3 sidebar">
         <div class="params">
-            <select ng-model="x" ng-option="param.value as param.label for param in params">
+            <div class="row">
+                <label for="xAxis">X:</label>
+                <select id="xAxis" ng-model="x" ng-options="param.value as param.label for param in params" custom-select data-axis="x"></select>
+            </div>
+            <div class="row">
+                <label for="yAxis">Y:</label>
+                <select id="yAxis" ng-model="y" ng-options="param.value as param.label for param in params" custom-select data-axis="y"></select>
+            </div>
         </div>
     </div>
 </div>

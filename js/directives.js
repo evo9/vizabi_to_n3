@@ -55,11 +55,48 @@ angular.module('chartsDirectives', ['utils'])
             return {
                 replace: true,
                 restrict: 'EA',
-                $scope: {
-                    time: '=',
-                    showPause: '='
-                },
                 link: link
             }
         }
-    ]);
+    ])
+    .directive('customSelect', [
+        function () {
+            return {
+                restrict: 'EA',
+                link: function ($scope, element) {
+                    element.styler({
+                        selectSearch: false,
+                        selectSmartPositioning: false
+                    });
+                    setTimeout(function() {
+                        element.trigger('refresh');
+                    }, 1);
+
+                    element.on('change', function() {
+                        var axis = element.data('axis');
+                        if (axis == 'x') {
+                            $scope.setXAxis();
+                        }
+                        if (axis == 'y') {
+                            $scope.setYAxis();
+                        }
+                    });
+
+                    $scope.setXAxis = function() {
+                        $scope.xAxis = $scope.x;
+                        if ($scope.chart !== null) {
+                            $scope.redraw();
+                        }
+                    };
+
+                    $scope.setYAxis = function() {
+                        $scope.yAxis = $scope.y;
+                        if ($scope.chart !== null) {
+                            $scope.redraw();
+                        }
+                    };
+                }
+            }
+        }
+    ])
+;

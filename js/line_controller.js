@@ -7,6 +7,8 @@ lineController.controller('LineCtrl', [
 
         $scope.local = 'en';
         $scope.geoCat = 'region';
+        $scope.xAxis = 'time';
+        $scope.yAxis = 'gdp_per_cap';
         $scope.colors = {
             _default: '#ffb600',
             world: '#ffb600',
@@ -15,11 +17,46 @@ lineController.controller('LineCtrl', [
             asi: '#FF5872',
             ame: '#7FEB00'
         };
+        $scope.params =[
+            {
+                label: 'TIME',
+                value: 'time'
+            },
+            {
+                label: 'GEO',
+                value: 'geo'
+            },
+            {
+                label: 'GEO_PER_CAP',
+                value: 'gdp_per_cap'
+            },
+            {
+                label: 'LEX',
+                value: 'lex'
+            },
+            {
+                label: 'POP',
+                value: 'pop'
+            },
+            {
+                label: 'GEO.REGION',
+                value: 'geo.region'
+            },
+            {
+                label: 'GEO.CATEGORY',
+                value: 'geo.cat'
+            },
+
+        ];
         $scope.names = [];
         $scope.basicIndicators = [];
         $scope.time = 2014;
         $scope.timeMin = 1990;
         $scope.timeMax = 2012;
+
+        $scope.showPause = false;
+        $scope.x = $scope.xAxis;
+        $scope.y = $scope.yAxis;
 
         $scope.chartData = function() {
             var result = [];
@@ -35,8 +72,8 @@ lineController.controller('LineCtrl', [
                     if (v['geo'] == name['geo'] && v['time'] <= $scope.time) {
 
                         data.values.push({
-                            x: v['time'],
-                            y: Math.round(v['gdp_per_cap'])
+                            x: v[$scope.xAxis],
+                            y: Math.round(v[$scope.yAxis])
                         });
                     }
                 });

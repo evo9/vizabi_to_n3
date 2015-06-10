@@ -7,6 +7,8 @@ barController.controller('BarCtrl', [
 
         $scope.local = 'en';
         $scope.geoCat = 'region';
+        $scope.xAxis = 'geo';
+        $scope.yAxis = 'lex';
         $scope.colors = {
             _default: '#ffb600',
             world: '#ffb600',
@@ -53,7 +55,8 @@ barController.controller('BarCtrl', [
         $scope.time = 2014;
 
         $scope.showPause = false;
-        $scope.x = null;
+        $scope.x = $scope.xAxis;
+        $scope.y = $scope.yAxis;
 
         $scope.chartData = function() {
             var result = [];
@@ -69,7 +72,7 @@ barController.controller('BarCtrl', [
                         data.values.push({
                             color: $scope.colors[name['geo']] ? $scope.colors[name['geo']] : $scope.colors['_default'],
                             label: name['geo.name'],
-                            value: Math.round(v['lex'])
+                            value: Math.round(v[$scope.yAxis])
                         });
                     }
                 });
@@ -95,7 +98,6 @@ barController.controller('BarCtrl', [
                                     .y(function(d) { return d.value })
                                     .staggerLabels(false)
                                     .showValues(false)
-                                    .forceY([55, 60, 65, 70, 75, 80, 85])
                                 ;
 
                                 $scope.chart.yAxis.tickFormat(d3.format('d'));
