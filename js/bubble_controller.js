@@ -50,7 +50,7 @@ bubbleController.controller('BubbleCtrl', [
         ];
         $scope.names = [];
         $scope.basicIndicators = [];
-        $scope.time = 2012;
+        $scope.time = 2000;
         $scope.timeMin = 1990;
         $scope.timeMax = 2014;
 
@@ -76,7 +76,7 @@ bubbleController.controller('BubbleCtrl', [
                             x: Math.round(v[$scope.xAxis]),
                             y: Math.round(v[$scope.yAxis]),
                             shape: 'circle',
-                            size: Math.round(v['pop'])
+                            size: v['pop']
                         });
                     }
                 });
@@ -106,6 +106,7 @@ bubbleController.controller('BubbleCtrl', [
                                     .forceX([250, 4000, 64000])
                                     .showDistX(true)
                                     .showDistY(true)
+                                    .xScale(d3.scale.log())
                                 ;
 
                                 d3.select('#chart svg')
