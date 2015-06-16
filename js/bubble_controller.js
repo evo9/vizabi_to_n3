@@ -70,13 +70,15 @@ bubbleController.controller('BubbleCtrl', [
                 angular.forEach($scope.basicIndicators, function(v, k) {
                     if (v['geo'] == name['geo'] && v['time'] == $scope.time && v['gdp_per_cap'] && v['lex'] && v['pop']) {
 
+                        var size = Math.round(v['pop'] * 0.2);
+
                         data.values.push({
                             color: $scope.colors[name['geo.region']] ? $scope.colors[name['geo.region']] : $scope.colors['_default'],
                             label: name['geo.name'],
                             x: Math.round(v[$scope.xAxis]),
                             y: Math.round(v[$scope.yAxis]),
                             shape: 'circle',
-                            size: v['pop']
+                            size: size.toString()
                         });
                     }
                 });
@@ -102,11 +104,12 @@ bubbleController.controller('BubbleCtrl', [
                                     .height(500)
                                     .width(500)
                                     .showLegend(false)
+                                    .xScale(d3.scale.log()
+                                        /*.domain([250, 4000, 64000])*/)
                                     .forceY([30, 40, 50, 60, 70, 80])
-                                    .forceX([250, 4000, 64000])
                                     .showDistX(true)
                                     .showDistY(true)
-                                    .xScale(d3.scale.log())
+                                    .showXAxis(true)
                                 ;
 
                                 d3.select('#chart svg')
