@@ -50,7 +50,7 @@ bubbleController.controller('BubbleCtrl', [
         ];
         $scope.names = [];
         $scope.basicIndicators = [];
-        $scope.time = 2000;
+        $scope.time = 2001;
         $scope.timeMin = 1990;
         $scope.timeMax = 2014;
 
